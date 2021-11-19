@@ -1,1 +1,3 @@
 <?php
+
+define("WHITE_LIST", ["Homepage"]);
