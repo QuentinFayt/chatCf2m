@@ -1,1 +1,1 @@
-# Petit projet de chat en php-html-css-javascript/jquery/Ajax
+# Petit projet de chat en html-css-php-mysql-javascript/jquery/Ajax
