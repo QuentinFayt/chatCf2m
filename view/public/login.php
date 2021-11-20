@@ -3,6 +3,11 @@
 
 <main>
     <form method="POST" action="">
+        <?php
+        if (isset($wrongLog)) {
+            echo "<h2>Error!</h2>";
+        }
+        ?>
         <div>
             <label for="login">Login</label>
             <input type="text" id="login" name="login" required />
