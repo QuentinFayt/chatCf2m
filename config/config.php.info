@@ -1,3 +1,10 @@
 <?php
 
+define("HOST", "host");
+define("USER", "user");
+define("PWD", "password");
+define("TABLE", "db");
+define("PORT", "1234");
+define("CHARSET","charset");
+
 define("WHITE_LIST", ["Homepage"]);
