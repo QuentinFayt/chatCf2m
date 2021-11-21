@@ -19,5 +19,6 @@ if (isset($_GET["p"]) && $_GET["p"] === "logout") {
         $params["httponly"]
     );
     session_destroy();
+    header("Location: ./");
 }
 include_once "../view/foot.php";
