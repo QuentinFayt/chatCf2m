@@ -1,8 +1,9 @@
 <?php
 session_start();
 require_once "../config/config.php";
-require "../model/DataFromDB.php";
+require "../model/dataFromDB.php";
 require "../controller/loginController.php";
+require "../model/inscriptionToDB.php";
 
 include_once "../view/head.php";
 include_once "../view/" . (isset($_SESSION["sessionID"]) ? "private/room" : "public/login") . ".php";
