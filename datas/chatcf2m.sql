@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : sam. 20 nov. 2021 à 16:55
+-- Généré le : Dim 21 nov. 2021 à 16:48
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -34,11 +34,13 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT,
   `login` varchar(100) NOT NULL,
-  `pwd` varchar(255) NOT NULL,
   `displayedName` varchar(100) NOT NULL,
+  `pwd` varchar(255) NOT NULL,
+  `mailCF2M` varchar(100) NOT NULL,
+  `valideAccount` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `login` (`login`),
-  UNIQUE KEY `displayedName` (`displayedName`)
+  UNIQUE KEY `mailCF2M` (`mailCF2M`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;

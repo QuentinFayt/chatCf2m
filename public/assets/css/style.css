@@ -1,0 +1,10 @@
+.validation {
+  display: none;
+}
+.toggleForm {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.matches {
+  display: none;
+}
