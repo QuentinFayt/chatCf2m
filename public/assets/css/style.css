@@ -1,3 +1,54 @@
+html * {
+  box-sizing: border-box;
+}
+:root {
+  --C_Background: #00daff;
+  --B_Background: #fff;
+}
+body {
+  margin: 0;
+  background-color: var(--C_Background);
+}
+.login,
+.inscription {
+  background-color: var(--B_Background);
+  width: 30vw;
+  margin: 0 auto;
+  padding: 2em;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 10%;
+  bottom: 90%;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 2px 2px 15px 3px rgba(0, 0, 0, 0.55);
+}
+.login form,
+.inscription form {
+  width: 100%;
+  text-align: center;
+}
+.login form div label,
+.inscription form div label {
+  width: 100%;
+  height: 2em;
+  line-height: 2em;
+  font-size: 1.2em;
+  display: inline-block;
+  text-align: center;
+}
+.login form div input,
+.inscription form div input {
+  display: block;
+  width: 80%;
+  height: 2em;
+  font-size: larger;
+  margin: 0 auto 3vh auto;
+}
 .validation {
   display: none;
 }
