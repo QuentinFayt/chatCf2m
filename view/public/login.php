@@ -3,8 +3,8 @@
 
 <main>
     <section class="login">
-        <h1>Connectez-vous!</h1>
         <form method="POST" action="">
+            <h1>Connectez-vous!</h1>
             <?php
             if (isset($wrongLog)) {
                 echo "<h2>Error!</h2>";
@@ -24,13 +24,12 @@
             <div>
                 <input type="submit" />
             </div>
+            <p class="toggleForm">Inscrivez vous sur le chat des webs!</p>
         </form>
-
-        <p class="toggleForm">Inscrivez vous sur le chat des webs!</p>
     </section>
     <section class="inscription" style="display:none;">
-        <h1>Inscrivez-vous!</h1>
         <form method="POST" action="">
+            <h1>Inscrivez-vous!</h1>
             <div>
                 <label for="loginInsc">Login:</label>
                 <input type="text" id="loginInsc" name="loginInsc" required />
