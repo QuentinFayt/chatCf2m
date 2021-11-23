@@ -42,6 +42,9 @@ function checkPasswords() {
     document.querySelector(".matches").style = "display:block;";
     document.querySelector(".matches").innerText =
       "Vos mots-de-passe ne correspondent pas!";
+  } else {
+    document.querySelector(".matches").style = "display:none;";
+    document.querySelector(".matches").innerText = "";
   }
 }
 document

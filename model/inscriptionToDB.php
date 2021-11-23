@@ -16,12 +16,12 @@ if (isset($_POST["loginInsc"]) && isset($_POST["nom"]) && isset($_POST["mdp"]) &
 
                 mysqli_query($DB, $insertSQL);
             } else {
-                $error = "<h2>Your password doesn't match!</h2>";
+                $error = '<h2 class="error">Your password doesn\'t match!</h2>';
             }
         } else {
-            $error = "<h2>Your mail isn't one of the CF2M!</h2>";
+            $error = '<h2 class="error">Your mail isn\'t one of the CF2M!</h2>';
         }
     } else {
-        $error = "<h2>Something went wrong!</h2>";
+        $error = '<h2 class="error">Something went wrong!</h2>';
     }
 }
