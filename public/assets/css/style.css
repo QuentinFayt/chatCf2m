@@ -1,6 +1,7 @@
 /*===============================Commun===============================*/
 html * {
   box-sizing: border-box;
+  height: 100%;
 }
 :root {
   --C_Background: #0099db;
@@ -8,6 +9,7 @@ html * {
   --B_Background: #fff;
 }
 body {
+  min-height: 100%;
   margin: 0;
   background-color: var(--C_Background);
 }
@@ -83,6 +85,65 @@ h1 {
   color: red;
 }
 /*===============================Chat===============================*/
+header {
+  margin-bottom: 1em;
+  padding-left: 2em;
+  display: inline-block;
+  width: 100%;
+}
+header p {
+  margin: 0;
+  display: block;
+  float: left;
+  padding-right: 1em;
+}
+header a {
+  display: block;
+}
+.room {
+  width: 100vw;
+  height: 96vh;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-template-rows: 5fr 1fr;
+  grid-template-areas:
+    "mes co"
+    "send but";
+  gap: 1em;
+  padding: 0 1em 1em 1em;
+}
+.room article {
+  grid-area: mes;
+}
+.room aside {
+  grid-area: co;
+}
+.room footer {
+  grid-area: send;
+}
+.room input {
+  grid-area: but;
+  border-radius: 20px;
+  font-size: xx-large;
+}
+.room footer form textarea {
+  resize: none;
+  width: 100%;
+  height: 100%;
+  font-size: xx-large;
+  border-radius: 20px;
+}
+header,
+.room article,
+.room aside,
+.room footer {
+  background-color: white;
+}
+.room article,
+.room aside,
+.room footer {
+  border-radius: 20px;
+}
 @media screen and (min-width: 801px) and (max-width: 1280px) {
   /*===============================Login===============================*/
   .login,

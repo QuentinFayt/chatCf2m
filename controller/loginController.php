@@ -8,7 +8,7 @@ if (isset($_POST["login"]) && isset($_POST["password"])) {
         mysqli_fetch_row(mysqli_query($DB, "SELECT `login` FROM `users` WHERE `login` = '$login' AND `valideAccount`= 1"))[0] && password_verify($password, mysqli_fetch_row(mysqli_query($DB, "SELECT `pwd` FROM `users` WHERE `login` = '$login'"))[0])
     ) {
         $_SESSION["sessionID"] = session_id();
-        $_SESSION["login"] = $login;
+        $_SESSION["name"] = mysqli_fetch_row(mysqli_query($DB, "SELECT `displayedName` FROM `users` WHERE `login` = '$login'"))[0];
     } else {
         $wrongLog = true;
     }
