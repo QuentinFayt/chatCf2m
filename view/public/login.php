@@ -7,7 +7,7 @@
             <h1>Connectez-vous!</h1>
             <?php
             if (isset($wrongLog)) {
-                echo "<h2>Error!</h2>";
+                echo '<h2 class="error">Erreur de connexion, vérifiez votre login/mot-de-passe!</h2>';
             }
             if (isset($error)) {
                 echo $error;
@@ -45,12 +45,12 @@
             <div>
                 <label for="mdpConfirm">Confirmez votre mot-de-passe:</label>
                 <input type="password" id="mdpConfirm" name="mdpConfirm" required />
-                <p class="matches"></p>
+                <p class="matches error"></p>
             </div>
             <div>
                 <label for="mail">Mail du CF2M:</label>
                 <input type="email" id="mail" name="mail" required />
-                <p class="validation"></p>
+                <p class="validation error"></p>
             </div>
             <div>
                 <input type="submit" />
