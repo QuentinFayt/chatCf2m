@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : Dim 21 nov. 2021 à 16:48
+-- Généré le : mer. 24 nov. 2021 à 08:35
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -27,6 +27,22 @@ USE `chatcf2m`;
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `messages`
+--
+
+DROP TABLE IF EXISTS `messages`;
+CREATE TABLE IF NOT EXISTS `messages` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `message` varchar(500) NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `users_id` tinyint(3) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_messages_users_idx` (`users_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `users`
 --
 
@@ -37,11 +53,22 @@ CREATE TABLE IF NOT EXISTS `users` (
   `displayedName` varchar(100) NOT NULL,
   `pwd` varchar(255) NOT NULL,
   `mailCF2M` varchar(100) NOT NULL,
-  `valideAccount` tinyint(1) NOT NULL DEFAULT '0',
+  `valideAccount` tinyint(4) NOT NULL DEFAULT '0',
+  `online` tinyint(4) NOT NULL DEFAULT '0',
+  `right` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0 => normal user\n1 => admin',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `login` (`login`),
-  UNIQUE KEY `mailCF2M` (`mailCF2M`)
+  UNIQUE KEY `login_UNIQUE` (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `messages`
+--
+ALTER TABLE `messages`
+  ADD CONSTRAINT `fk_messages_users` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
