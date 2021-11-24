@@ -10,7 +10,8 @@
         ?>
             <div class="messages">
                 <p><span class="name"><?= $message["displayedName"] ?></span></p>
-                <p><?= $message["message"] ?><span class="date"><?= $message["date"] ?></span></p>
+                <p><?= $message["message"] ?></p>
+                <p><span class="date"><?= $message["date"] ?></span></p>
             </div>
         <?php
         }
