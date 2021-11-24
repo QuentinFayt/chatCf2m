@@ -5,6 +5,16 @@
 </header>
 <main class="room">
     <article>
+        <?php
+        foreach (getMessages($DB) as $message) {
+        ?>
+            <div class="messages">
+                <p><span class="name"><?= $message["displayedName"] ?></span></p>
+                <p><?= $message["message"] ?><span class="date"><?= $message["date"] ?></span></p>
+            </div>
+        <?php
+        }
+        ?>
     </article>
     <aside>
     </aside>

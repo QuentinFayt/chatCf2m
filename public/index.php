@@ -4,6 +4,7 @@ require_once "../config/config.php";
 require "../model/dataFromDB.php";
 require "../controller/loginController.php";
 require "../model/inscriptionToDB.php";
+require "../model/messages.php";
 
 include_once "../view/head.php";
 include_once "../view/" . (isset($_SESSION["sessionID"]) ? "private/room" : "public/login") . ".php";
