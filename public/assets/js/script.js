@@ -17,8 +17,9 @@ function checkMail() {
   document.querySelector(".validation").style = "display:block;";
   document.querySelector(".validation").innerText = returnValue;
 }
-document.querySelector("#mail").addEventListener("keyup", checkMail);
-
+if (document.querySelector("#mail")) {
+  document.querySelector("#mail").addEventListener("keyup", checkMail);
+}
 /*=========================Toggle login/Sign in forms=========================*/
 
 function toggleInscription() {
@@ -47,6 +48,13 @@ function checkPasswords() {
     document.querySelector(".matches").innerText = "";
   }
 }
-document
-  .querySelector("#mdpConfirm")
-  .addEventListener("change", checkPasswords);
+if (document.querySelector("#mdpConfirm")) {
+  document
+    .querySelector("#mdpConfirm")
+    .addEventListener("change", checkPasswords);
+}
+if (document.querySelector(".send")) {
+  document.querySelector(".send").addEventListener("click", function (e) {
+    e.preventDefault();
+  });
+}
