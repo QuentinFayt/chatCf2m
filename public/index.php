@@ -4,10 +4,11 @@ require_once "../config/config.php";
 require "../model/dataFromDB.php";
 require "../controller/loginController.php";
 require "../model/inscriptionToDB.php";
-require "../model/messages.php";
+require "../model/getMessages.php";
 
 include_once "../view/head.php";
 include_once "../view/" . (isset($_SESSION["sessionID"]) ? "private/room" : "public/login") . ".php";
+
 if (isset($_GET["p"]) && $_GET["p"] === "logout") {
     session_unset();
     $params = session_get_cookie_params();
