@@ -56,5 +56,53 @@ if (document.querySelector("#mdpConfirm")) {
 if (document.querySelector(".send")) {
   document.querySelector(".send").addEventListener("click", function (e) {
     e.preventDefault();
+    let data = {
+      message: document.querySelector("#message").value,
+    };
+    $.post("assets/api/message.php", data);
+    $("#message").val("");
   });
+}
+if (document.querySelector(".room")) {
+  let lastId = null;
+  $.get(
+    "assets/api/loadMessages.php",
+    function success(data) {
+      if (data[0]) {
+        lastId = data[data.length - 1].id;
+      }
+    },
+    "JSON"
+  );
+  setInterval(function () {
+    $.get(
+      "assets/api/loadMessages.php",
+      function success(data) {
+        if (data[0]) {
+          let insertMessage =
+            '<div class="messages"><p><span class="name">' +
+            data[data.length - 1].displayedName +
+            "</span></p><p>" +
+            data[data.length - 1].message +
+            '</p><p><span class="date">' +
+            data[data.length - 1].date +
+            "</span></p></div>";
+          if (lastId < data[data.length - 1].id) {
+            lastId = data[data.length - 1].id;
+            let divMessages = document.querySelectorAll(".messages");
+            let ifNoMessage = document.querySelector(".room article");
+            if (divMessages[0]) {
+              divMessages[divMessages.length - 1].insertAdjacentHTML(
+                "afterend",
+                insertMessage
+              );
+            } else {
+              ifNoMessage.insertAdjacentHTML("afterbegin", insertMessage);
+            }
+          }
+        }
+      },
+      "JSON"
+    );
+  }, 500);
 }
