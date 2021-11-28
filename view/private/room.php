@@ -26,5 +26,4 @@
             <textarea id="message" name="message"></textarea>
         </form>
     </footer>
-    <input type="submit" value="send" form="messages" class="send" />
 </main>
