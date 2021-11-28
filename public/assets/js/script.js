@@ -75,7 +75,6 @@ if (document.querySelector(".room")) {
       function success(data) {
         if (data[0]) {
           let whoIsLogged = document.querySelector("header p span").innerHTML;
-          console.log(data);
           /* if (data[0].displayedName === whoIsLogged) { */
           var insertMessage =
             '<div class="right"><div class="messages"><p><span class="name">' +
@@ -114,6 +113,7 @@ if (document.querySelector(".room")) {
       },
       "JSON"
     );
+    $.get("assets/api/loadUsers.php", function success(data) {}, "JSON");
   }, 500);
   document.addEventListener("DOMContentLoaded", () => {
     let scrollTo = document.querySelector(".room article");

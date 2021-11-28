@@ -6,7 +6,7 @@
 <main class="room">
     <article>
         <?php
-        $messageJson = file_get_contents("http://chat/assets/api/loadMessages.php", "loadMessages.php");
+        $messageJson = file_get_contents(MESSAGES_URL_API, "loadMessages.php");
         $messageJson = json_decode($messageJson);
         foreach ($messageJson as $message) {
         ?>
@@ -23,16 +23,16 @@
     </article>
     <aside>
         <?php
-        $onlineUsers = getUsers($DB, true);
-        $offlineUsers = getUsers($DB);
+        $users = file_get_contents(USERS_URL_API, "loadUsers.php");
+        $users = json_decode($users);
         ?>
         <div>
             <h3>Connected</h3>
             <?php
-            if ($onlineUsers) {
-                foreach ($onlineUsers as $user) {
+            foreach ($users as $user) {
+                if ($user->online === "1") {
             ?>
-                    <p><?= $user["displayedName"] ?></p>
+                    <p><?= $user->displayedName ?></p>
             <?php
                 }
             }
@@ -41,10 +41,12 @@
         <div>
             <h3>Members</h3>
             <?php
-            foreach ($offlineUsers as $user) {
+            foreach ($users as $user) {
+                if (!($user->online === "1")) {
             ?>
-                <p><?= $user["displayedName"] ?></p>
+                    <p><?= $user->displayedName ?></p>
             <?php
+                }
             }
             ?>
         </div>
