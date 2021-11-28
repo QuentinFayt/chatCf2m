@@ -1,7 +1,7 @@
 <?php
 ?>
 <header>
-    <p>Welcome: <?= $_SESSION["name"] ?></p><a href="?p=logout">Logout</a>
+    <p>Welcome: <span><?= $_SESSION["name"] ?></span></p><a href="?p=logout">Logout</a>
 </header>
 <main class="room">
     <article>
@@ -10,10 +10,12 @@
         $messageJson = json_decode($messageJson);
         foreach ($messageJson as $message) {
         ?>
-            <div class="messages">
-                <p><span class="name"><?= $message->displayedName ?></span></p>
-                <p><?= $message->message ?></p>
-                <p><span class="date"><?= $message->date ?></span></p>
+            <div class="<?php echo $message->online ? "right" : ""; ?>">
+                <div class="messages">
+                    <p><span class="name"><?= $message->displayedName ?></span></p>
+                    <p><?= $message->message ?></p>
+                    <p><span class="date"><?= $message->date ?></span></p>
+                </div>
             </div>
         <?php
         }
