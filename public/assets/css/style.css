@@ -123,22 +123,40 @@ header a {
 }
 .room {
   width: 100%;
-  height: 95vh;
+  height: 94vh;
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: 1fr 4fr;
   grid-template-rows: 5fr 1fr;
   grid-template-areas:
-    "mes co"
-    "send send";
+    "co mes"
+    "co send";
   gap: 1em;
   padding: 0 1em 1em 1em;
 }
 .room article {
   grid-area: mes;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 .room aside {
   grid-area: co;
+  border-right: 3px solid #fff;
+  height: 100%;
+  overflow-y: scroll;
+}
+.room aside div {
+  height: fit-content;
+}
+.room aside h3 {
+  text-align: center;
+  margin: 0;
+  text-decoration: underline;
+  color: #fff;
+}
+.room aside div p {
+  color: #fff;
 }
 .room footer {
   grid-area: send;
@@ -156,12 +174,10 @@ header a {
   border: none;
 }
 header,
-.room aside,
 .room footer {
   background-color: white;
 }
 .room article,
-.room aside,
 .room footer {
   border-radius: 20px;
 }

@@ -20,6 +20,32 @@
         ?>
     </article>
     <aside>
+        <?php
+        $onlineUsers = getUsers($DB, true);
+        $offlineUsers = getUsers($DB);
+        ?>
+        <div>
+            <h3>Connected</h3>
+            <?php
+            if ($onlineUsers) {
+                foreach ($onlineUsers as $user) {
+            ?>
+                    <p><?= $user["displayedName"] ?></p>
+            <?php
+                }
+            }
+            ?>
+        </div>
+        <div>
+            <h3>Members</h3>
+            <?php
+            foreach ($offlineUsers as $user) {
+            ?>
+                <p><?= $user["displayedName"] ?></p>
+            <?php
+            }
+            ?>
+        </div>
     </aside>
     <footer>
         <form id="messages" method="POST" action="">
