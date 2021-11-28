@@ -9,8 +9,8 @@ if (isset($_POST["login"]) && isset($_POST["password"])) {
     ) {
         $_SESSION["sessionID"] = session_id();
         $_SESSION["name"] = mysqli_fetch_row(mysqli_query($DB, "SELECT `displayedName` FROM `chatcf2m_users` WHERE `login` = '$login'"))[0];
-        $_SESSION["userID"] =  mysqli_fetch_row(mysqli_query($DB, "SELECT `id` FROM `chatcf2m_users` WHERE `login` = '$login'"))[0];
-        mysqli_query($DB, "UPDATE `chatcf2m_users` SET `online`= 1 WHERE `id` = " . $_SESSION["userID"] . " ;");
+        $_SESSION["userID"] =  mysqli_fetch_row(mysqli_query($DB, "SELECT `users_id` FROM `chatcf2m_users` WHERE `login` = '$login'"))[0];
+        mysqli_query($DB, "UPDATE `chatcf2m_users` SET `online`= 1 WHERE `users_id` = " . $_SESSION["userID"] . " ;");
     } else {
         $wrongLog = true;
     }

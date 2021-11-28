@@ -11,7 +11,7 @@ include_once "../view/head.php";
 include_once "../view/" . (isset($_SESSION["sessionID"]) ? "private/room" : "public/login") . ".php";
 
 if (isset($_GET["p"]) && $_GET["p"] === "logout") {
-    mysqli_query($DB, "UPDATE `chatcf2m_users` SET `online`= 0 WHERE `id` = " . $_SESSION["userID"] . ";");
+    mysqli_query($DB, "UPDATE `chatcf2m_users` SET `online`= 0 WHERE `users_id` = " . $_SESSION["userID"] . ";");
     session_unset();
     $params = session_get_cookie_params();
     setcookie(

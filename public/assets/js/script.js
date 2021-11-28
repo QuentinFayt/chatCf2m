@@ -64,7 +64,7 @@ if (document.querySelector(".room")) {
     "assets/api/loadMessages.php",
     function success(data) {
       if (data[0]) {
-        lastId = data[data.length - 1].id;
+        lastId = data[data.length - 1].messages_id;
       }
     },
     "JSON"
@@ -75,16 +75,17 @@ if (document.querySelector(".room")) {
       function success(data) {
         if (data[0]) {
           let whoIsLogged = document.querySelector("header p span").innerHTML;
-          if (data[0].displayedName === whoIsLogged) {
-            var insertMessage =
-              '<div class="right"><div class="messages"><p><span class="name">' +
-              data[data.length - 1].displayedName +
-              "</span></p><p>" +
-              data[data.length - 1].message +
-              '</p><p><span class="date">' +
-              data[data.length - 1].date +
-              "</span></p></div></div>";
-          } else {
+          console.log(data);
+          /* if (data[0].displayedName === whoIsLogged) { */
+          var insertMessage =
+            '<div class="right"><div class="messages"><p><span class="name">' +
+            data[data.length - 1].displayedName +
+            "</span></p><p>" +
+            data[data.length - 1].message +
+            '</p><p><span class="date">' +
+            data[data.length - 1].date +
+            "</span></p></div></div>";
+          /* } else {
             var insertMessage =
               '<div><div class="messages"><p><span class="name">' +
               data[data.length - 1].displayedName +
@@ -93,9 +94,9 @@ if (document.querySelector(".room")) {
               '</p><p><span class="date">' +
               data[data.length - 1].date +
               "</span></p></div></div>";
-          }
-          if (lastId < data[data.length - 1].id) {
-            lastId = data[data.length - 1].id;
+          } */
+          if (lastId < data[data.length - 1].messages_id) {
+            lastId = data[data.length - 1].messages_id;
             let divMessages = document.querySelectorAll(".messages");
             let ifNoMessage = document.querySelector(".room article");
             if (divMessages[0]) {
