@@ -96,6 +96,8 @@ if (document.querySelector(".room")) {
                 "afterend",
                 insertMessage
               );
+              ifNoMessage.scrollTop =
+                ifNoMessage.scrollHeight - ifNoMessage.clientHeight;
             } else {
               ifNoMessage.insertAdjacentHTML("afterbegin", insertMessage);
             }
@@ -105,4 +107,8 @@ if (document.querySelector(".room")) {
       "JSON"
     );
   }, 500);
+  document.addEventListener("DOMContentLoaded", () => {
+    let scrollTo = document.querySelector(".room article");
+    scrollTo.scrollTop = scrollTo.scrollHeight - scrollTo.clientHeight;
+  });
 }
