@@ -2,7 +2,7 @@
 
 function getUsers($db, $logged = false)
 {
-    $sql = "SELECT `id`,`displayedName`,`online` FROM `users`";
+    $sql = "SELECT `id`,`displayedName`,`online` FROM `chatcf2m_users`";
     if ($logged) {
         $sql = $sql . "WHERE `online` = 1";
     } else {

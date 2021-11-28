@@ -12,7 +12,7 @@ if (isset($_POST["loginInsc"]) && isset($_POST["nom"]) && isset($_POST["mdp"]) &
         if (count(explode(".", $splitMail[0])) === 2 && $splitMail[1] === "cf2000.onmicrosoft.com") {
             if ($mdp === $mdpConfirm) {
                 $hashed = password_hash($mdp, PASSWORD_DEFAULT);
-                $insertSQL = "INSERT INTO `users`(`login`, `displayedName`, `pwd`, `mailCF2M`) VALUES ('$loginInsc','$nom','$hashed','$mail');";
+                $insertSQL = "INSERT INTO `chatcf2m_users`(`login`, `displayedName`, `pwd`, `mailCF2M`) VALUES ('$loginInsc','$nom','$hashed','$mail');";
 
                 mysqli_query($DB, $insertSQL);
             } else {
