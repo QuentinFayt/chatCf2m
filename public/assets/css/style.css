@@ -136,8 +136,13 @@ header a {
 .room article {
   grid-area: mes;
   overflow-y: scroll;
+}
+.room article div {
   display: flex;
   flex-direction: column;
+  height: fit-content;
+}
+.right {
   align-items: flex-end;
 }
 .room aside {
