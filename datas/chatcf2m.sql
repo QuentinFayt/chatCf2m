@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : Dim 28 nov. 2021 à 15:41
+-- Généré le : Dim 28 nov. 2021 à 16:42
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -32,11 +32,11 @@ USE `chatcf2m`;
 
 DROP TABLE IF EXISTS `chatcf2m_messages`;
 CREATE TABLE IF NOT EXISTS `chatcf2m_messages` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `messages_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `message` varchar(500) NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `users_id` tinyint(3) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`messages_id`),
   KEY `fk_messages_users_idx` (`users_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `chatcf2m_messages` (
 
 DROP TABLE IF EXISTS `chatcf2m_users`;
 CREATE TABLE IF NOT EXISTS `chatcf2m_users` (
-  `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `users_id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT,
   `login` varchar(100) NOT NULL,
   `displayedName` varchar(100) NOT NULL,
   `pwd` varchar(255) NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `chatcf2m_users` (
   `valideAccount` tinyint(4) NOT NULL DEFAULT '0',
   `online` tinyint(4) NOT NULL DEFAULT '0',
   `right` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0 => normal user\n1 => admin',
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`users_id`),
   UNIQUE KEY `login_UNIQUE` (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `chatcf2m_users` (
 -- Contraintes pour la table `chatcf2m_messages`
 --
 ALTER TABLE `chatcf2m_messages`
-  ADD CONSTRAINT `fk_messages_users` FOREIGN KEY (`users_id`) REFERENCES `chatcf2m_users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_messages_users` FOREIGN KEY (`users_id`) REFERENCES `chatcf2m_users` (`users_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 

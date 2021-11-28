@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : Dim 28 nov. 2021 à 15:49
+-- Généré le : Dim 28 nov. 2021 à 16:43
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `chatcf2m_users`;
 CREATE TABLE IF NOT EXISTS `chatcf2m_users` (
-  `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `users_id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT,
   `login` varchar(100) NOT NULL,
   `displayedName` varchar(100) NOT NULL,
   `pwd` varchar(255) NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `chatcf2m_users` (
   `valideAccount` tinyint(4) NOT NULL DEFAULT '0',
   `online` tinyint(4) NOT NULL DEFAULT '0',
   `right` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0 => normal user\n1 => admin',
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`users_id`),
   UNIQUE KEY `login_UNIQUE` (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 SET FOREIGN_KEY_CHECKS=1;
