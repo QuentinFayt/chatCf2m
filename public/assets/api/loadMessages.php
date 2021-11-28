@@ -1,7 +1,7 @@
 <?php
 
 require_once "../../../config/config.php";
-require_once "../../../model/DataFromDB.php";
+require_once "../../../model/dataFromDB.php";
 require_once "../../../model/getMessages.php";
 
 if (!$loaded) {

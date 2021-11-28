@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once "../../../config/config.php";
-require_once "../../../model/DataFromDB.php";
+require_once "../../../model/dataFromDB.php";
 require_once "../../../model/sendMessage.php";
 
 if (isset($_POST["message"])) {
