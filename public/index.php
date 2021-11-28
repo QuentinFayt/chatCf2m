@@ -5,11 +5,13 @@ require "../model/dataFromDB.php";
 require "../controller/loginController.php";
 require "../model/inscriptionToDB.php";
 require "../model/getMessages.php";
+require "../model/getUsers.php";
 
 include_once "../view/head.php";
 include_once "../view/" . (isset($_SESSION["sessionID"]) ? "private/room" : "public/login") . ".php";
 
 if (isset($_GET["p"]) && $_GET["p"] === "logout") {
+    mysqli_query($DB, "UPDATE `users` SET `online`= 0 WHERE `id` = " . $_SESSION["userID"] . ";");
     session_unset();
     $params = session_get_cookie_params();
     setcookie(

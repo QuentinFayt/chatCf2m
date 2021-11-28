@@ -10,6 +10,7 @@ if (isset($_POST["login"]) && isset($_POST["password"])) {
         $_SESSION["sessionID"] = session_id();
         $_SESSION["name"] = mysqli_fetch_row(mysqli_query($DB, "SELECT `displayedName` FROM `users` WHERE `login` = '$login'"))[0];
         $_SESSION["userID"] =  mysqli_fetch_row(mysqli_query($DB, "SELECT `id` FROM `users` WHERE `login` = '$login'"))[0];
+        mysqli_query($DB, "UPDATE `users` SET `online`= 1 WHERE `id` = " . $_SESSION["userID"] . " ;");
     } else {
         $wrongLog = true;
     }
