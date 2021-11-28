@@ -129,7 +129,7 @@ header a {
   grid-template-rows: 5fr 1fr;
   grid-template-areas:
     "mes co"
-    "send but";
+    "send send";
   gap: 1em;
   padding: 0 1em 1em 1em;
 }
@@ -142,11 +142,6 @@ header a {
 }
 .room footer {
   grid-area: send;
-}
-.room input {
-  grid-area: but;
-  border-radius: 20px;
-  font-size: xx-large;
 }
 .room footer form textarea {
   resize: none;

@@ -56,11 +56,6 @@ if (document.querySelector("#mdpConfirm")) {
 if (document.querySelector(".send")) {
   document.querySelector(".send").addEventListener("click", function (e) {
     e.preventDefault();
-    let data = {
-      message: document.querySelector("#message").value,
-    };
-    $.post("assets/api/message.php", data);
-    $("#message").val("");
   });
 }
 if (document.querySelector(".room")) {
@@ -110,5 +105,15 @@ if (document.querySelector(".room")) {
   document.addEventListener("DOMContentLoaded", () => {
     let scrollTo = document.querySelector(".room article");
     scrollTo.scrollTop = scrollTo.scrollHeight - scrollTo.clientHeight;
+  });
+  document.addEventListener("keydown", (event) => {
+    let key = event.key;
+    if (key === "Enter") {
+      let data = {
+        message: document.querySelector("#message").value,
+      };
+      $.post("assets/api/message.php", data);
+      $("#message").val("");
+    }
   });
 }
