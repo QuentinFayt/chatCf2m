@@ -53,11 +53,6 @@ if (document.querySelector("#mdpConfirm")) {
     .querySelector("#mdpConfirm")
     .addEventListener("change", checkPasswords);
 }
-if (document.querySelector(".send")) {
-  document.querySelector(".send").addEventListener("click", function (e) {
-    e.preventDefault();
-  });
-}
 if (document.querySelector(".room")) {
   let lastId = null;
   $.get(
@@ -73,9 +68,8 @@ if (document.querySelector(".room")) {
     $.get(
       "assets/api/loadMessages.php",
       function success(data) {
+        console.log(data);
         if (data[0]) {
-          let whoIsLogged = document.querySelector("header p span").innerHTML;
-          /* if (data[0].displayedName === whoIsLogged) { */
           var insertMessage =
             '<div class="right"><div class="messages"><p><span class="name">' +
             data[data.length - 1].displayedName +
@@ -84,16 +78,6 @@ if (document.querySelector(".room")) {
             '</p><p><span class="date">' +
             data[data.length - 1].date +
             "</span></p></div></div>";
-          /* } else {
-            var insertMessage =
-              '<div><div class="messages"><p><span class="name">' +
-              data[data.length - 1].displayedName +
-              "</span></p><p>" +
-              data[data.length - 1].message +
-              '</p><p><span class="date">' +
-              data[data.length - 1].date +
-              "</span></p></div></div>";
-          } */
           if (lastId < data[data.length - 1].messages_id) {
             lastId = data[data.length - 1].messages_id;
             let divMessages = document.querySelectorAll(".messages");
@@ -113,7 +97,7 @@ if (document.querySelector(".room")) {
       },
       "JSON"
     );
-    $.get("assets/api/loadUsers.php", function success(data) {}, "JSON");
+    /* $.get("assets/api/loadUsers.php", function success(data) {}, "JSON"); */
   }, 500);
   document.addEventListener("DOMContentLoaded", () => {
     let scrollTo = document.querySelector(".room article");

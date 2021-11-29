@@ -11,4 +11,3 @@ define("WHITE_LIST", ["Homepage"]);
 
 define("MESSAGES_URL_API", "http://chat/assets/api/loadMessages.php");
 define("USERS_URL_API", "http://chat/assets/api/loadUsers.php");
-$loaded = false;
