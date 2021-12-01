@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once "../config/config.php";
-require "../model/dataFromDB.php";
+require "../model/dbConnexion.php";
 require "../controller/loginController.php";
 require "../model/inscriptionToDB.php";
 require "../model/getMessages.php";
