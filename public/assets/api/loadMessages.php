@@ -1,10 +1,9 @@
 <?php
-
+session_start();
 require_once "../../../config/config.php";
 require_once "../../../model/dataFromDB.php";
 require_once "../../../model/getMessages.php";
 
-
-$json = json_encode(getMessages($DB));
-
-echo $json;
+if (isset($_SESSION["sessionID"]) && $_SESSION["sessionID"] == session_id()) {
+    echo json_encode(getMessages($DB));
+}

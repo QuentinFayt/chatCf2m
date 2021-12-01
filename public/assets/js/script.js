@@ -73,7 +73,7 @@ if (document.querySelector("#mdpConfirm")) {
 }
 if (document.querySelector(".room")) {
   let lastId = null;
-  $.get(
+  /* $.get(
     "assets/api/loadMessages.php",
     function success(data) {
       if (data[0]) {
@@ -81,7 +81,7 @@ if (document.querySelector(".room")) {
       }
     },
     "JSON"
-  );
+  ); */
   setInterval(function () {
     $.get(
       "assets/api/loadMessages.php",

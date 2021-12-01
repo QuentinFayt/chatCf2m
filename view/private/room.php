@@ -6,8 +6,7 @@
 <main class="room">
     <article>
         <?php
-        $messageJson = file_get_contents(MESSAGES_URL_API, "loadMessages.php");
-        $messageJson = json_decode($messageJson);
+        $messageJson = json_decode(file_get_contents(MESSAGES_URL_API));
         foreach ($messageJson as $message) {
         ?>
             <div id="<?= $message->messages_id ?>" class="<?php echo $message->users_id === $_SESSION["userID"] ? "right" : ""; ?>">
@@ -23,7 +22,7 @@
     </article>
     <aside>
         <?php
-        $users = file_get_contents(USERS_URL_API, "loadUsers.php");
+        $users = file_get_contents(USERS_URL_API);
         $users = json_decode($users);
         ?>
         <div>
