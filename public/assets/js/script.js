@@ -34,24 +34,6 @@ document
   .querySelectorAll(".toggleForm")
   .forEach((el) => el.addEventListener("click", toggleInscription));
 
-class Message {
-  constructor(id, displayedName, message, date) {
-    this.id = id;
-    this.displayedName = displayedName;
-    this.message = message;
-    this.date = date;
-  }
-
-  writeMessage() {
-    return `<div id="${this.id}" class="right">
-      <div class="messages">
-        <p><span class="name">${this.displayedName}</span></p>
-        <p>${this.message}</p>
-        <p><span class="date">${this.date}</span></p>
-      </div>
-    </div>`;
-  }
-}
 /*=========================Check if pwds matches=========================*/
 function checkPasswords() {
   let password1 = document.querySelector("#mdp");
@@ -71,55 +53,133 @@ if (document.querySelector("#mdpConfirm")) {
     .querySelector("#mdpConfirm")
     .addEventListener("change", checkPasswords);
 }
+/*=========================Class Message=========================*/
+class Message {
+  constructor(id, displayedName, message, date) {
+    this.id = id;
+    this.displayedName = displayedName;
+    this.message = message;
+    this.date = date;
+  }
+
+  writeMessage() {
+    return `<div id="${this.id}" class="${this.checkAutor()} messageBox">
+      <div class="messages">
+        <p><span class="name">${this.displayedName}</span></p>
+        <p>${this.message}</p>
+        <p><span class="date">${this.date}</span></p>
+      </div>
+    </div>`;
+  }
+  checkAutor() {
+    let whoIsOn = document.querySelector("header p span").innerHTML;
+    if (this.displayedName == whoIsOn) {
+      return "right";
+    }
+  }
+}
+/*=========================AJAX=========================*/
+/*========Load all messages from DB========*/
 if (document.querySelector(".room")) {
-  let lastId = null;
-  /* $.get(
+  let messagesContainer = document.querySelector(".room article");
+  let onlineUsersContainer = document.querySelector(".online");
+  let offlineUsersContainer = document.querySelector(".offline");
+  $.get(
     "assets/api/loadMessages.php",
     function success(data) {
-      if (data[0]) {
-        lastId = data[data.length - 1].messages_id;
-      }
+      data.reverse();
+      data.forEach((message) => {
+        messagesContainer.insertAdjacentHTML(
+          "afterbegin",
+          new Message(
+            message.messages_id,
+            message.displayedName,
+            message.message,
+            message.date
+          ).writeMessage()
+        );
+        let scrollTo = document.querySelector(".room article");
+        scrollTo.scrollTop = scrollTo.scrollHeight - scrollTo.clientHeight;
+      });
     },
     "JSON"
-  ); */
+  );
+  /*========Load all users from DB========*/
+  $.get(
+    "assets/api/loadUsers.php",
+    function success(data) {
+      data.forEach((user) => {
+        if (user.online == 1) {
+          onlineUsersContainer.insertAdjacentHTML(
+            "afterend",
+            `<p>${user.displayedName}</p>`
+          );
+        } else {
+          offlineUsersContainer.insertAdjacentHTML(
+            "afterend",
+            `<p>${user.displayedName}</p>`
+          );
+        }
+      });
+    },
+    "JSON"
+  );
+  /*========Load all messages from DB after last index every 5 secondes========*/
   setInterval(function () {
     $.get(
       "assets/api/loadMessages.php",
       function success(data) {
-        //new Message.writeMessage();
-        /*  if (data[0]) {
-          if (lastId < data[data.length - 1].messages_id) {
-            lastId = data[data.length - 1].messages_id;
-            let divMessages = document.querySelectorAll(".messages");
-            let ifNoMessage = document.querySelector(".room article");
-            if (divMessages[0]) {
-              divMessages[divMessages.length - 1].insertAdjacentHTML(
+        let messagesList = document.querySelectorAll(".messageBox");
+        if (messagesList.length) {
+          var lastId = messagesList[messagesList.length - 1].id;
+        } else {
+          lastId = -1;
+        }
+        data.forEach((message) => {
+          if (messagesList.length) {
+            if (message.messages_id > lastId) {
+              messagesList[messagesList.length - 1].insertAdjacentHTML(
                 "afterend",
-                insertMessage
+                new Message(
+                  message.messages_id,
+                  message.displayedName,
+                  message.message,
+                  message.date
+                ).writeMessage()
               );
-              ifNoMessage.scrollTop =
-                ifNoMessage.scrollHeight - ifNoMessage.clientHeight;
-            } else {
-              ifNoMessage.insertAdjacentHTML("afterbegin", insertMessage);
+              let scrollTo = document.querySelector(".room article");
+              scrollTo.scrollTop =
+                scrollTo.scrollHeight - scrollTo.clientHeight;
             }
+          } else {
+            messagesContainer.insertAdjacentHTML(
+              "afterbegin",
+              new Message(
+                message.messages_id,
+                message.displayedName,
+                message.message,
+                message.date
+              ).writeMessage()
+            );
           }
-        } */
+          messagesList = document.querySelectorAll(".messageBox");
+          lastId = messagesList[messagesList.length - 1].id;
+        });
       },
       "JSON"
     );
-    /* $.get("assets/api/loadUsers.php", function success(data) {}, "JSON"); */
+    /*========Load all users from DB========*/
+    $.get("assets/api/loadUsers.php", function success(data) {}, "JSON");
   }, 500);
-  document.addEventListener("DOMContentLoaded", () => {
-    let scrollTo = document.querySelector(".room article");
-    scrollTo.scrollTop = scrollTo.scrollHeight - scrollTo.clientHeight;
-  });
+  /*========post new message to DB========*/
   document.addEventListener("keydown", (event) => {
     let key = event.key;
     if (key === "Enter") {
+      event.preventDefault();
       let data = {
         message: document.querySelector("#message").value,
       };
-      $.post("assets/api/message.php", data);
+      $.post("assets/api/postMessage.php", data);
       $("#message").val("");
     }
   });
