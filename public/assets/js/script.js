@@ -34,6 +34,24 @@ document
   .querySelectorAll(".toggleForm")
   .forEach((el) => el.addEventListener("click", toggleInscription));
 
+class Message {
+  constructor(id, displayedName, message, date) {
+    this.id = id;
+    this.displayedName = displayedName;
+    this.message = message;
+    this.date = date;
+  }
+
+  writeMessage() {
+    return `<div id="${this.id}" class="right">
+      <div class="messages">
+        <p><span class="name">${this.displayedName}</span></p>
+        <p>${this.message}</p>
+        <p><span class="date">${this.date}</span></p>
+      </div>
+    </div>`;
+  }
+}
 /*=========================Check if pwds matches=========================*/
 function checkPasswords() {
   let password1 = document.querySelector("#mdp");
@@ -68,16 +86,8 @@ if (document.querySelector(".room")) {
     $.get(
       "assets/api/loadMessages.php",
       function success(data) {
-        console.log(data);
-        if (data[0]) {
-          var insertMessage =
-            '<div class="right"><div class="messages"><p><span class="name">' +
-            data[data.length - 1].displayedName +
-            "</span></p><p>" +
-            data[data.length - 1].message +
-            '</p><p><span class="date">' +
-            data[data.length - 1].date +
-            "</span></p></div></div>";
+        //new Message.writeMessage();
+        /*  if (data[0]) {
           if (lastId < data[data.length - 1].messages_id) {
             lastId = data[data.length - 1].messages_id;
             let divMessages = document.querySelectorAll(".messages");
@@ -93,7 +103,7 @@ if (document.querySelector(".room")) {
               ifNoMessage.insertAdjacentHTML("afterbegin", insertMessage);
             }
           }
-        }
+        } */
       },
       "JSON"
     );

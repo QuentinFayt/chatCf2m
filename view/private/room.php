@@ -10,7 +10,7 @@
         $messageJson = json_decode($messageJson);
         foreach ($messageJson as $message) {
         ?>
-            <div class="<?php echo $message->users_id === $_SESSION["userID"] ? "right" : ""; ?>">
+            <div id="<?= $message->messages_id ?>" class="<?php echo $message->users_id === $_SESSION["userID"] ? "right" : ""; ?>">
                 <div class="messages">
                     <p><span class="name"><?= $message->displayedName ?></span></p>
                     <p><?= $message->message ?></p>
