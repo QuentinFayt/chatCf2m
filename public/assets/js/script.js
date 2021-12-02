@@ -169,7 +169,29 @@ if (document.querySelector(".room")) {
       "JSON"
     );
     /*========Load all users from DB========*/
-    $.get("assets/api/loadUsers.php", function success(data) {}, "JSON");
+    let online = [];
+    let offline = [];
+    $.get(
+      "assets/api/loadUsers.php",
+      function success(data) {
+        data.forEach((element) => {
+          if (element.online == 1 && !online.includes(data)) {
+            if (offline.includes(data)) {
+              let index = offline.indexOf(data);
+              offline.splice(index, 1);
+            }
+            online.push(data);
+          } else if (element.online == 0 && !offline.includes(data)) {
+            if (online.includes(data)) {
+              let index = offline.indexOf(data);
+              offline.splice(index, 1);
+            }
+            offline.push(data);
+          }
+        });
+      },
+      "JSON"
+    );
   }, 500);
   /*========post new message to DB========*/
   document.addEventListener("keydown", (event) => {
