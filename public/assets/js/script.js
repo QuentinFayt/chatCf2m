@@ -79,6 +79,7 @@ class Message {
   }
 }
 /*=========================AJAX=========================*/
+
 /*========Load all messages from DB========*/
 if (document.querySelector(".room")) {
   let messagesContainer = document.querySelector(".room article");
@@ -112,12 +113,12 @@ if (document.querySelector(".room")) {
         if (user.online == 1) {
           onlineUsersContainer.insertAdjacentHTML(
             "afterend",
-            `<p>${user.displayedName}</p>`
+            `<p id="user${user.users_id}">${user.displayedName}</p>`
           );
         } else {
           offlineUsersContainer.insertAdjacentHTML(
             "afterend",
-            `<p>${user.displayedName}</p>`
+            `<p id="user${user.users_id}">${user.displayedName}</p>`
           );
         }
       });
@@ -125,6 +126,7 @@ if (document.querySelector(".room")) {
     "JSON"
   );
   /*========Load all messages from DB after last index every 5 secondes========*/
+
   setInterval(function () {
     $.get(
       "assets/api/loadMessages.php",
@@ -169,24 +171,34 @@ if (document.querySelector(".room")) {
       "JSON"
     );
     /*========Load all users from DB========*/
-    let online = [];
-    let offline = [];
     $.get(
       "assets/api/loadUsers.php",
       function success(data) {
-        data.forEach((element) => {
-          if (element.online == 1 && !online.includes(data)) {
-            if (offline.includes(data)) {
-              let index = offline.indexOf(data);
-              offline.splice(index, 1);
+        data.forEach((user) => {
+          if (user.online == 1) {
+            if (
+              !document.querySelector(
+                `.onlineContainer > #user${user.users_id}`
+              )
+            ) {
+              document.querySelector(`#user${user.users_id}`).remove();
+              onlineUsersContainer.insertAdjacentHTML(
+                "afterend",
+                `<p id="user${user.users_id}">${user.displayedName}</p>`
+              );
             }
-            online.push(data);
-          } else if (element.online == 0 && !offline.includes(data)) {
-            if (online.includes(data)) {
-              let index = offline.indexOf(data);
-              offline.splice(index, 1);
+          } else {
+            if (
+              !document.querySelector(
+                `.offlineContainer > #user${user.users_id}`
+              )
+            ) {
+              document.querySelector(`#user${user.users_id}`).remove();
+              offlineUsersContainer.insertAdjacentHTML(
+                "afterend",
+                `<p id="user${user.users_id}">${user.displayedName}</p>`
+              );
             }
-            offline.push(data);
           }
         });
       },
