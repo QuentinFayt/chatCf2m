@@ -7,10 +7,10 @@
     <article>
     </article>
     <aside>
-        <div>
+        <div class="onlineContainer">
             <h3 class="online">Connected</h3>
         </div>
-        <div>
+        <div class="offlineContainer">
             <h3 class="offline">Members</h3>
         </div>
     </aside>
