@@ -5,6 +5,8 @@ require "../model/dbConnexion.php";
 require "../controller/loginController.php";
 require "../model/inscriptionToDB.php";
 require "../model/getUsers.php";
+require "../model/userModel.php";
+require "../controller/userController.php";
 
 include_once "../view/head.php";
 $users = getUsersForAdmin($DB);

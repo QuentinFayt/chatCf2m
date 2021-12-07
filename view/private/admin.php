@@ -33,8 +33,9 @@
             <div>
                 <p class="displayedName"><?= $user["displayedName"] ?></p>
                 <form method="POST" class="changeName">
-                    <textarea><?= $user["displayedName"] ?></textarea>
-                    <button>Yes</button>
+                    <textarea name="changeName"><?= $user["displayedName"] ?></textarea>
+                    <input type=hidden value="<?= $user["users_id"] ?>" name="userIdToChangeName" />
+                    <button type="submit">Yes</button>
                     <a href="./?p=admin">No</a>
                 </form>
             </div>
@@ -46,10 +47,12 @@
                     <?php
                     if ($user["valideAccount"] == 1) {
                     ?>
+                        <input type="hidden" value="<?= $user["users_id"] ?>" name="Unvalidate" />
                         <button type="submit" class="unvalid">Unvalidate</button>
                     <?php
                     } else {
                     ?>
+                        <input type="hidden" value="<?= $user["users_id"] ?>" name="validate" />
                         <button type="submit" class="valid">Validate</button>
                     <?php
                     }
@@ -60,7 +63,8 @@
                 <button type="submit" class="deleteButton">Delete</button>
                 <form method="POST" class="delete">
                     <p>Are you sure?</p>
-                    <button>Yes</button>
+                    <input type="hidden" value="<?= $user["users_id"] ?>" name="delete" />
+                    <button type="submit">Yes</button>
                     <a href="./?p=admin">No</a>
                 </form>
             </div>
