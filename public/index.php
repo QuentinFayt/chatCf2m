@@ -8,6 +8,10 @@ require "../model/getUsers.php";
 require "../model/userModel.php";
 require "../controller/userController.php";
 
+require '../model/PHPMailer/src/Exception.php';
+require '../model/PHPMailer/src/PHPMailer.php';
+require '../model/PHPMailer/src/SMTP.php';
+
 include_once "../view/head.php";
 $users = getUsersForAdmin($DB);
 if (isset($_SESSION["sessionID"])) {
