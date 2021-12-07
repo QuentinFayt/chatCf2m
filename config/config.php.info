@@ -7,4 +7,5 @@ define("TABLE", "db");
 define("PORT", "1234");
 define("CHARSET","charset");
 
-define("WHITE_LIST", ["Homepage"]);
+define("MAIL", "test@testmail.test");
+define("MDP", "password");
