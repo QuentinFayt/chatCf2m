@@ -1,7 +1,7 @@
 <?php
 ?>
 <header>
-    <p>Welcome: <span><?= $_SESSION["name"] ?></span></p><a href="?p=logout">Logout</a>
+    <p>Welcome: <span><?= $_SESSION["name"] ?></span></p><a href="?p=logout">Logout</a> <?php if ($_SESSION["right"] === "1") { ?><a href="?p=admin">Administration</a><?php } ?>
 </header>
 <main class="room">
     <article>

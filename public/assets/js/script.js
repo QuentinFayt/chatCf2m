@@ -218,3 +218,20 @@ if (document.querySelector(".room")) {
     }
   });
 }
+if (document.querySelector(".admin")) {
+  let deleteButton = document.querySelectorAll(".deleteButton");
+  let displayedName = document.querySelectorAll(".displayedName");
+
+  deleteButton.forEach((el) =>
+    el.addEventListener("click", function () {
+      this.style.display = "none";
+      this.nextElementSibling.style.display = "grid";
+    })
+  );
+  displayedName.forEach((el) =>
+    el.addEventListener("click", function () {
+      this.style.display = "none";
+      this.nextElementSibling.style.display = "grid";
+    })
+  );
+}
