@@ -9,10 +9,10 @@ if (isset($_POST["loginInsc"]) && isset($_POST["nom"]) && isset($_POST["mdp"]) &
     $nom = htmlspecialchars(strip_tags(trim($_POST["nom"])), ENT_QUOTES);
     $mdp = htmlspecialchars(strip_tags(trim($_POST["mdp"])), ENT_QUOTES);
     $mdpConfirm = htmlspecialchars(strip_tags(trim($_POST["mdpConfirm"])), ENT_QUOTES);
-    $mail = strtolower(filter_var(htmlspecialchars(strip_tags(trim($_POST["mail"])), ENT_QUOTES), FILTER_VALIDATE_EMAIL));
+    $usermail = strtolower(filter_var(htmlspecialchars(strip_tags(trim($_POST["mail"])), ENT_QUOTES), FILTER_VALIDATE_EMAIL));
 
-    if ($loginInsc && $nom && $mdp && $mdpConfirm && $mail) {
-        $splitMail = explode("@", $mail);
+    if ($loginInsc && $nom && $mdp && $mdpConfirm && $usermail) {
+        $splitMail = explode("@", $usermail);
 
         if (count(explode(".", $splitMail[0])) === 2 && $splitMail[1] === "cf2000.onmicrosoft.com") {
             if ($mdp === $mdpConfirm) {
@@ -34,7 +34,7 @@ if (isset($_POST["loginInsc"]) && isset($_POST["nom"]) && isset($_POST["mdp"]) &
 
                 $mail->send();
                 $hashed = password_hash($mdp, PASSWORD_DEFAULT);
-                $insertSQL = "INSERT INTO `chatcf2m_users`(`login`, `displayedName`, `pwd`, `mailCF2M`) VALUES ('$loginInsc','$nom','$hashed','$mail');";
+                $insertSQL = "INSERT INTO `chatcf2m_users`(`login`, `displayedName`, `pwd`, `mailCF2M`) VALUES ('$loginInsc','$nom','$hashed','$usermail');";
 
                 mysqli_query($DB, $insertSQL);
             } else {
