@@ -113,12 +113,12 @@ if (document.querySelector(".room")) {
         if (user.online == 1) {
           onlineUsersContainer.insertAdjacentHTML(
             "afterend",
-            `<p id="user${user.users_id}">${user.displayedName}</p>`
+            `<p id="user${user.users_id}" class="users">${user.displayedName}</p>`
           );
         } else {
           offlineUsersContainer.insertAdjacentHTML(
             "afterend",
-            `<p id="user${user.users_id}">${user.displayedName}</p>`
+            `<p id="user${user.users_id}" class="users">${user.displayedName}</p>`
           );
         }
       });
@@ -174,6 +174,20 @@ if (document.querySelector(".room")) {
     $.get(
       "assets/api/loadUsers.php",
       function success(data) {
+        let dataUsers = [];
+        data.forEach((user) => {
+          dataUsers.push(user.users_id);
+        });
+        let users = document.querySelectorAll(".users");
+        let usersCheck = [];
+        users.forEach((el) => {
+          usersCheck.push(el.id.replace("user", ""));
+        });
+        usersCheck.forEach((el) => {
+          if (!dataUsers.includes(el)) {
+            document.querySelector(`#user${el}`).remove();
+          }
+        });
         data.forEach((user) => {
           if (user.online == 1) {
             if (
@@ -181,10 +195,12 @@ if (document.querySelector(".room")) {
                 `.onlineContainer > #user${user.users_id}`
               )
             ) {
-              document.querySelector(`#user${user.users_id}`).remove();
+              if (document.querySelector(`#user${user.users_id}`)) {
+                document.querySelector(`#user${user.users_id}`).remove();
+              }
               onlineUsersContainer.insertAdjacentHTML(
                 "afterend",
-                `<p id="user${user.users_id}">${user.displayedName}</p>`
+                `<p id="user${user.users_id}" class="users">${user.displayedName}</p>`
               );
             }
           } else {
@@ -193,10 +209,12 @@ if (document.querySelector(".room")) {
                 `.offlineContainer > #user${user.users_id}`
               )
             ) {
-              document.querySelector(`#user${user.users_id}`).remove();
+              if (document.querySelector(`#user${user.users_id}`)) {
+                document.querySelector(`#user${user.users_id}`).remove();
+              }
               offlineUsersContainer.insertAdjacentHTML(
                 "afterend",
-                `<p id="user${user.users_id}">${user.displayedName}</p>`
+                `<p id="user${user.users_id}" class="users">${user.displayedName}</p>`
               );
             }
           }

@@ -256,18 +256,8 @@ header,
   color: white;
   margin: 2em;
 }
-.valid {
-  background-color: green;
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  padding: 1em;
-  height: fit-content;
-}
+.valid,
 .unvalid {
-  background-color: red;
   border: none;
   border-radius: 10px;
   color: white;
@@ -276,6 +266,12 @@ header,
   cursor: pointer;
   padding: 1em;
   height: fit-content;
+}
+.valid {
+  background-color: green;
+}
+.unvalid {
+  background-color: red;
 }
 .row div .changeName,
 .row div .delete {

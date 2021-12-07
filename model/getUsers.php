@@ -2,7 +2,7 @@
 
 function getUsers($db)
 {
-    $sql = "SELECT `users_id`,`displayedName`,`online` FROM `chatcf2m_users`";
+    $sql = "SELECT `users_id`,`displayedName`,`online` FROM `chatcf2m_users` WHERE `valideAccount`= 1";
     return mysqli_fetch_all(mysqli_query($db, $sql), MYSQLI_ASSOC);
 }
 
