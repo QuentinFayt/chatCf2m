@@ -15,7 +15,7 @@ if (isset($_SESSION["sessionID"])) {
 } else {
     include_once "../view/public/login.php";
 }
-if (isset($_GET["p"]) && $_GET["p"] === "logout") {
+if ((isset($_GET["p"]) && $_GET["p"] === "logout") || (isset($_SESSION["sessionID"]) && $_SESSION["sessionID"] !== session_id())) {
     mysqli_query($DB, "UPDATE `chatcf2m_users` SET `online`= 0 WHERE `users_id` = " . $_SESSION["userID"] . ";");
     session_unset();
     $params = session_get_cookie_params();
