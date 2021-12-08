@@ -1,7 +1,7 @@
 <?php
 ?>
 <header>
-    <p>Welcome: <span><?= $_SESSION["name"] ?></span></p><a href="?p=logout">Logout</a> <?php if ($_SESSION["right"] === "1") { ?><a href="?p=admin">Administration</a><?php } ?>
+    <p>Welcome: <span id="<?= $_SESSION["userID"] ?>"><?= $_SESSION["name"] ?></span></p><a href=" ?p=logout">Logout</a> <?php if ($_SESSION["right"] === "1") { ?><a href="?p=admin">Administration</a><?php } ?>
 </header>
 <main class="room">
     <article>
@@ -16,7 +16,7 @@
     </aside>
     <footer>
         <form id="messages" method="POST" action="">
-            <textarea id="message" name="message"></textarea>
+            <textarea id="message" name="message" maxlength="450"></textarea>
         </form>
     </footer>
 </main>
