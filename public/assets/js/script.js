@@ -55,11 +55,12 @@ if (document.querySelector("#mdpConfirm")) {
 }
 /*=========================Class Message=========================*/
 class Message {
-  constructor(id, displayedName, message, date) {
+  constructor(id, displayedName, message, date, userId) {
     this.id = id;
     this.displayedName = displayedName;
     this.message = message;
     this.date = date;
+    this.userId = userId;
   }
 
   writeMessage() {
@@ -72,8 +73,9 @@ class Message {
     </div>`;
   }
   checkAutor() {
-    let whoIsOn = document.querySelector("header p span").innerHTML;
-    if (this.displayedName == whoIsOn) {
+    let whoIsOn = document.querySelector("header p span").id;
+    if (this.userId == whoIsOn) {
+      console.log(this.userId, whoIsOn);
       return "right";
     }
   }
@@ -96,7 +98,8 @@ if (document.querySelector(".room")) {
             message.messages_id,
             message.displayedName,
             message.message,
-            message.date
+            message.date,
+            message.users_id
           ).writeMessage()
         );
         let scrollTo = document.querySelector(".room article");
@@ -146,7 +149,8 @@ if (document.querySelector(".room")) {
                   message.messages_id,
                   message.displayedName,
                   message.message,
-                  message.date
+                  message.date,
+                  message.users_id
                 ).writeMessage()
               );
               let scrollTo = document.querySelector(".room article");
