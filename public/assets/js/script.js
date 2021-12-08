@@ -66,7 +66,7 @@ class Message {
     return `<div id="${this.id}" class="${this.checkAutor()} messageBox">
       <div class="messages">
         <p><span class="name">${this.displayedName}</span></p>
-        <p>${this.message}</p>
+        <p>${this.message.length > 80 ? this.message : this.message}</p>
         <p><span class="date">${this.date}</span></p>
       </div>
     </div>`;
