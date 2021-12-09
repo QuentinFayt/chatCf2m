@@ -176,6 +176,7 @@ if (document.querySelector(".room")) {
           }
           messagesList = document.querySelectorAll(".messageBox");
           $("#message").prop("disabled", false);
+          $("#message").focus();
           lastId = messagesList[messagesList.length - 1].id;
         });
       },
