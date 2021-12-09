@@ -152,9 +152,16 @@ if (document.querySelector(".room")) {
                   message.users_id
                 ).writeMessage()
               );
-              let scrollTo = document.querySelector(".room article");
-              scrollTo.scrollTop =
-                scrollTo.scrollHeight - scrollTo.clientHeight;
+              let getId = document.querySelector("header p span").id;
+              if (message.users_id == getId) {
+                let scrollTo = document.querySelector(".room article");
+                scrollTo.scrollTop =
+                  scrollTo.scrollHeight - scrollTo.clientHeight;
+                let displayMessageLength = document.querySelector(
+                  ".messageLength p span"
+                );
+                displayMessageLength.innerText = 0;
+              }
             }
           } else {
             messagesContainer.insertAdjacentHTML(
@@ -168,6 +175,7 @@ if (document.querySelector(".room")) {
             );
           }
           messagesList = document.querySelectorAll(".messageBox");
+          $("#message").prop("disabled", false);
           lastId = messagesList[messagesList.length - 1].id;
         });
       },
@@ -234,8 +242,12 @@ if (document.querySelector(".room")) {
       let data = {
         message: document.querySelector("#message").value,
       };
-      $.post("assets/api/postMessage.php", data);
-      $("#message").val("");
+      if (data.message.length) {
+        $.post("assets/api/postMessage.php", data, () => {
+          $("#message").prop("disabled", true);
+        });
+        $("#message").val("");
+      }
     }
   });
   document.querySelector("#message").addEventListener("keyup", function () {

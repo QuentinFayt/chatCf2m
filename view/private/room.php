@@ -16,7 +16,7 @@
     </aside>
     <footer>
         <div class="messageLength">
-            <p><span></span>/500</p>
+            <p><span>0</span>/500</p>
         </div>
         <form id="messages" method="POST" action="">
             <textarea id="message" name="message" maxlength="500"></textarea>
