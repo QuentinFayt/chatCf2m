@@ -75,7 +75,6 @@ class Message {
   checkAutor() {
     let whoIsOn = document.querySelector("header p span").id;
     if (this.userId == whoIsOn) {
-      console.log(this.userId, whoIsOn);
       return "right";
     }
   }
@@ -238,6 +237,10 @@ if (document.querySelector(".room")) {
       $.post("assets/api/postMessage.php", data);
       $("#message").val("");
     }
+  });
+  document.querySelector("#message").addEventListener("keyup", function () {
+    let displayMessageLength = document.querySelector(".messageLength p span");
+    displayMessageLength.innerText = this.value.length;
   });
 }
 if (document.querySelector(".admin")) {
