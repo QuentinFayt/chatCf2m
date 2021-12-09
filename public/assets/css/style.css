@@ -179,13 +179,26 @@ header a {
   outline: none;
   border: none;
 }
-header,
-.room footer {
+header {
   background-color: white;
 }
 .room article,
 .room footer {
   border-radius: 20px;
+}
+.room footer {
+  position: relative;
+}
+.messageLength {
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  right: 20px;
+  bottom: 5px;
+}
+.messageLength p {
+  margin: 0;
+  color: var(--C_Background);
 }
 .messages {
   height: fit-content;
@@ -197,6 +210,8 @@ header,
   display: flex;
   flex-direction: column;
   gap: 1em;
+  max-width: 80ch;
+  overflow-wrap: break-word;
 }
 .messages p {
   margin: 0;
