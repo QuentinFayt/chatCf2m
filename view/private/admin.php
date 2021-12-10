@@ -5,6 +5,14 @@
     <a href="./">Chat</a>
 </header>
 <h1 class="list">Liste des utilisateurs</h1>
+
+<button type="submit" class="deleteButton clearMessages">Clear Messages</button>
+<form method="POST" class="delete">
+    <p>Are you sure?</p>
+    <input type="hidden" name="clear" />
+    <button type="submit" class="deleteButton">Yes</button>
+    <a href="./?p=admin" class="deleteButton">No</a>
+</form>
 <main class="admin">
     <div class="row">
         <div>

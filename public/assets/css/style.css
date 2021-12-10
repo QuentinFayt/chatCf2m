@@ -235,6 +235,13 @@ header {
   background-color: white;
   padding: 1em;
 }
+.clearMessages {
+  width: fit-content;
+  margin: 1em auto;
+}
+.clearMessages:hover {
+  border: 1px solid white;
+}
 .row {
   display: grid;
   grid-template-columns: 0.5fr 1fr 3fr 1fr 1fr;
