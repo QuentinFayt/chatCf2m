@@ -10,8 +10,10 @@
 <form method="POST" class="delete">
     <p>Are you sure?</p>
     <input type="hidden" name="clear" />
-    <button type="submit" class="deleteButton">Yes</button>
-    <a href="./?p=admin" class="deleteButton">No</a>
+    <div>
+        <button type="submit" class="clearButton">Yes</button>
+        <a href="./?p=admin" class="clearButton">No</a>
+    </div>
 </form>
 <main class="admin">
     <div class="row">
@@ -23,6 +25,9 @@
         </div>
         <div>
             <p>Mail</p>
+        </div>
+        <div>
+            <p>Log</p>
         </div>
         <div>
             <p>Validation</p>
@@ -49,6 +54,22 @@
             </div>
             <div>
                 <p><?= $user["mailCF2M"] ?></p>
+            </div>
+            <div>
+                <form method="POST">
+                    <?php
+                    if ($user["online"] == 1) {
+                    ?>
+                        <input type="hidden" value="<?= $user["users_id"] ?>" name="logout" />
+                        <button type="submit" class="unvalid">Log out</button>
+                    <?php
+                    } else {
+                    ?>
+                        <p class="offlineButton">offline</p>
+                    <?php
+                    }
+                    ?>
+                </form>
             </div>
             <div>
                 <form method="POST">

@@ -8,6 +8,6 @@ function getUsers($db)
 
 function getUsersForAdmin($db)
 {
-    $sql = "SELECT `users_id`,`displayedName`,`mailCF2M`,`valideAccount`FROM `chatcf2m_users`;";
+    $sql = "SELECT `users_id`,`displayedName`,`mailCF2M`,`valideAccount`,`online` FROM `chatcf2m_users`;";
     return mysqli_fetch_all(mysqli_query($db, $sql), MYSQLI_ASSOC);
 }

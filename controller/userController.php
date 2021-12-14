@@ -31,3 +31,12 @@ if (isset($_POST["delete"])) {
         header("Location: ./?p=admin");
     }
 }
+
+if (isset($_POST["logout"])) {
+    $id = (int) $_POST["logout"];
+
+    if ($id) {
+        logoutUser($DB, $id);
+        header("Location: ./?p=admin");
+    }
+}
