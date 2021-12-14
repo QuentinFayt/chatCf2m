@@ -170,7 +170,8 @@ if (document.querySelector(".room")) {
                 message.messages_id,
                 message.displayedName,
                 message.message,
-                message.date
+                message.date,
+                message.users_id
               ).writeMessage()
             );
           }
@@ -258,7 +259,13 @@ if (document.querySelector(".room")) {
 }
 if (document.querySelector(".admin")) {
   let deleteButton = document.querySelectorAll(".deleteButton");
+  let clearMessages = document.querySelector(".clearMessages");
   let displayedName = document.querySelectorAll(".displayedName");
+
+  clearMessages.addEventListener("click", function () {
+    this.style.display = "none";
+    this.nextElementSibling.style.display = "flex";
+  });
 
   deleteButton.forEach((el) =>
     el.addEventListener("click", function () {
