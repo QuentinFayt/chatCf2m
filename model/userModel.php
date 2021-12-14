@@ -8,7 +8,7 @@
  */
 function usersValidation(mysqli $db, int $id, bool $type)
 {
-    $sql = "UPDATE chatcf2m_users SET `valideAccount` = " . (int) $type . " WHERE users_id = $id;";
+    $sql = "UPDATE chatcf2m_users SET `valideAccount` = " . (int) $type . " WHERE users_id = $id AND `right` = 0;";
     mysqli_query($db, $sql) or die(mysqli_error($db));
 }
 
