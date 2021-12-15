@@ -9,3 +9,5 @@ define("CHARSET","charset");
 
 define("MAIL", "test@testmail.test");
 define("MDP", "password");
+
+define("NUMBER_TO_DISPLAY",20);

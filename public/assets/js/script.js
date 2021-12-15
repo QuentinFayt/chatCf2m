@@ -89,10 +89,9 @@ if (document.querySelector(".room")) {
   $.get(
     "assets/api/loadMessages.php",
     function success(data) {
-      data.reverse();
       data.forEach((message) => {
         messagesContainer.insertAdjacentHTML(
-          "afterbegin",
+          "beforeend",
           new Message(
             message.messages_id,
             message.displayedName,
@@ -131,7 +130,8 @@ if (document.querySelector(".room")) {
 
   setInterval(function () {
     $.get(
-      "assets/api/loadMessages.php",
+      "assets/api/loadNewMessages.php",
+      "test",
       function success(data) {
         let messagesList = document.querySelectorAll(".messageBox");
         if (messagesList.length) {

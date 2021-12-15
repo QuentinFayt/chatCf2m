@@ -5,6 +5,10 @@
 </header>
 <main class="room">
     <article>
+        <form method="POST">
+            <input type="hidden" name="more" />
+            <button type="submit" class="loadMore">Load More</button>
+        </form>
     </article>
     <aside>
         <div class="onlineContainer">
