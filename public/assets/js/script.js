@@ -86,6 +86,7 @@ if (document.querySelector(".room")) {
   let messagesContainer = document.querySelector(".room article");
   let onlineUsersContainer = document.querySelector(".online");
   let offlineUsersContainer = document.querySelector(".offline");
+  let loadMore = document.querySelector(".loadMore");
   $.get(
     "assets/api/loadMessages.php",
     function success(data) {
@@ -106,7 +107,31 @@ if (document.querySelector(".room")) {
     },
     "JSON"
   );
-  /*========Load all users from DB========*/
+
+  loadMore.addEventListener("click", () => {
+    let messages = document.querySelectorAll(".messageBox");
+    messages = Array.from(messages);
+    let offsetToLoad = (messages.pop().id - messages.shift().id + 1).toString();
+    $.get(
+      "assets/api/loadOlderMessages.php",
+      offsetToLoad,
+      function success(data) {
+        data.forEach((message) => {
+          loadMore.insertAdjacentHTML(
+            "afterend",
+            new Message(
+              message.messages_id,
+              message.displayedName,
+              message.message,
+              message.date,
+              message.users_id
+            ).writeMessage()
+          );
+        });
+      },
+      "JSON"
+    );
+  }); /*========Load all users from DB========*/
   $.get(
     "assets/api/loadUsers.php",
     function success(data) {
@@ -128,9 +153,9 @@ if (document.querySelector(".room")) {
   );
   /*========Load all messages from DB after last index every 5 secondes========*/
 
-  setInterval(function () {
-    $.get(
-      "assets/api/loadNewMessages.php",
+  /*   setInterval(function () { */
+  /*     $.get(
+      "assets/api/loadMessages.php",
       "test",
       function success(data) {
         let messagesList = document.querySelectorAll(".messageBox");
@@ -143,7 +168,7 @@ if (document.querySelector(".room")) {
           if (messagesList.length) {
             if (message.messages_id > lastId) {
               messagesList[messagesList.length - 1].insertAdjacentHTML(
-                "afterend",
+                "beforeend",
                 new Message(
                   message.messages_id,
                   message.displayedName,
@@ -165,7 +190,7 @@ if (document.querySelector(".room")) {
             }
           } else {
             messagesContainer.insertAdjacentHTML(
-              "afterbegin",
+              "beforeend",
               new Message(
                 message.messages_id,
                 message.displayedName,
@@ -182,9 +207,9 @@ if (document.querySelector(".room")) {
         });
       },
       "JSON"
-    );
-    /*========Load all users from DB========*/
-    $.get(
+    ); */
+  /*========Load all users from DB========*/
+  /*  $.get(
       "assets/api/loadUsers.php",
       function success(data) {
         let dataUsers = [];
@@ -235,7 +260,7 @@ if (document.querySelector(".room")) {
       },
       "JSON"
     );
-  }, 500);
+  }, 500); */
   /*========post new message to DB========*/
   document.addEventListener("keydown", (event) => {
     let key = event.key;
