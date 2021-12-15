@@ -227,6 +227,25 @@ header {
   float: right;
   margin-left: 1em;
 }
+.loadMore {
+  height: fit-content;
+  width: fit-content;
+  margin: 1em auto;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  font-size: small;
+  justify-content: center;
+  border: 1px solid var(--C_Background);
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: var(--B_Background);
+}
+.loadMore:hover {
+  background-color: var(--C_Background);
+  color: white;
+  border: 1px solid var(--B_Background);
+}
 /*===============================Admin===============================*/
 .admin {
   width: 80vw;

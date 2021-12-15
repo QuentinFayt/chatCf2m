@@ -7,7 +7,6 @@ require_once "../../../model/userModel.php";
 
 if (isset($_SESSION["sessionID"]) && $_SESSION["sessionID"] == session_id()) {
     if (isset($_POST["message"])) {
-
         if (checkIfOnline($DB, $_SESSION["userID"])["online"] === "1") {
             $message = htmlspecialchars(strip_tags(trim($_POST["message"])), ENT_QUOTES);
             sendMessage($DB, $message);

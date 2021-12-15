@@ -5,10 +5,7 @@
 </header>
 <main class="room">
     <article>
-        <form method="POST">
-            <input type="hidden" name="more" />
-            <button type="submit" class="loadMore">Load More</button>
-        </form>
+        <button class="loadMore">Load More</button>
     </article>
     <aside>
         <div class="onlineContainer">
