@@ -116,6 +116,9 @@ if (document.querySelector(".room")) {
       "assets/api/loadOlderMessages.php",
       offsetToLoad,
       function success(data) {
+        if (data.length < 20) {
+          loadMore.style.display = "none";
+        }
         data.forEach((message) => {
           loadMore.insertAdjacentHTML(
             "afterend",
@@ -153,63 +156,41 @@ if (document.querySelector(".room")) {
   );
   /*========Load all messages from DB after last index every 5 secondes========*/
 
-  /*   setInterval(function () { */
-  /*     $.get(
-      "assets/api/loadMessages.php",
-      "test",
+  setInterval(function () {
+    let messages = document.querySelectorAll(".messageBox");
+    messages = Array.from(messages);
+    $.get(
+      "assets/api/loadNewMessages.php",
+      messages.pop().id,
       function success(data) {
-        let messagesList = document.querySelectorAll(".messageBox");
-        if (messagesList.length) {
-          var lastId = messagesList[messagesList.length - 1].id;
-        } else {
-          lastId = -1;
-        }
         data.forEach((message) => {
-          if (messagesList.length) {
-            if (message.messages_id > lastId) {
-              messagesList[messagesList.length - 1].insertAdjacentHTML(
-                "beforeend",
-                new Message(
-                  message.messages_id,
-                  message.displayedName,
-                  message.message,
-                  message.date,
-                  message.users_id
-                ).writeMessage()
-              );
-              let getId = document.querySelector("header p span").id;
-              if (message.users_id == getId) {
-                let scrollTo = document.querySelector(".room article");
-                scrollTo.scrollTop =
-                  scrollTo.scrollHeight - scrollTo.clientHeight;
-                let displayMessageLength = document.querySelector(
-                  ".messageLength p span"
-                );
-                displayMessageLength.innerText = 0;
-              }
-            }
-          } else {
-            messagesContainer.insertAdjacentHTML(
-              "beforeend",
-              new Message(
-                message.messages_id,
-                message.displayedName,
-                message.message,
-                message.date,
-                message.users_id
-              ).writeMessage()
+          messagesContainer.insertAdjacentHTML(
+            "beforeend",
+            new Message(
+              message.messages_id,
+              message.displayedName,
+              message.message,
+              message.date,
+              message.users_id
+            ).writeMessage()
+          );
+          let getId = document.querySelector("header p span").id;
+          if (message.users_id == getId) {
+            let scrollTo = document.querySelector(".room article");
+            scrollTo.scrollTop = scrollTo.scrollHeight - scrollTo.clientHeight;
+            let displayMessageLength = document.querySelector(
+              ".messageLength p span"
             );
+            displayMessageLength.innerText = 0;
+            $("#message").prop("disabled", false);
+            $("#message").focus();
           }
-          messagesList = document.querySelectorAll(".messageBox");
-          $("#message").prop("disabled", false);
-          $("#message").focus();
-          lastId = messagesList[messagesList.length - 1].id;
         });
       },
       "JSON"
-    ); */
-  /*========Load all users from DB========*/
-  /*  $.get(
+    );
+    /*========Load all users from DB========*/
+    $.get(
       "assets/api/loadUsers.php",
       function success(data) {
         let dataUsers = [];
@@ -260,7 +241,7 @@ if (document.querySelector(".room")) {
       },
       "JSON"
     );
-  }, 500); */
+  }, 500);
   /*========post new message to DB========*/
   document.addEventListener("keydown", (event) => {
     let key = event.key;
