@@ -64,7 +64,7 @@ class Message {
   }
 
   writeMessage() {
-    return `<div id="${this.id}" class="${this.checkAutor()} messageBox">
+    return `<div id="${this.id}" class="${this.checkAutor()}messageBox">
       <div class="messages">
         <p><span class="name">${this.displayedName}</span></p>
         <p>${this.message.length > 80 ? this.message : this.message}</p>
@@ -74,9 +74,7 @@ class Message {
   }
   checkAutor() {
     let whoIsOn = document.querySelector("header p span").id;
-    if (this.userId == whoIsOn) {
-      return "right";
-    }
+    return this.userId == whoIsOn ? "right " : "";
   }
 }
 /*=========================AJAX=========================*/
