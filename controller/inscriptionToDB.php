@@ -5,11 +5,11 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
 if (isset($_POST["loginInsc"]) && isset($_POST["nom"]) && isset($_POST["mdp"]) && isset($_POST["mdpConfirm"]) && isset($_POST["mail"])) {
-    $loginInsc = htmlspecialchars(strip_tags(trim($_POST["loginInsc"])), ENT_QUOTES);
-    $nom = htmlspecialchars(strip_tags(trim($_POST["nom"])), ENT_QUOTES);
-    $mdp = htmlspecialchars(strip_tags(trim($_POST["mdp"])), ENT_QUOTES);
-    $mdpConfirm = htmlspecialchars(strip_tags(trim($_POST["mdpConfirm"])), ENT_QUOTES);
-    $usermail = strtolower(filter_var(htmlspecialchars(strip_tags(trim($_POST["mail"])), ENT_QUOTES), FILTER_VALIDATE_EMAIL));
+    $loginInsc = userEntryProtection($_POST["loginInsc"]);
+    $nom = userEntryProtection($_POST["nom"]);
+    $mdp = userEntryProtection($_POST["mdp"]);
+    $mdpConfirm = userEntryProtection($_POST["mdpConfirm"]);
+    $usermail = strtolower(filter_var(userEntryProtection($_POST["mail"]), FILTER_VALIDATE_EMAIL));
 
     if ($loginInsc && $nom && $mdp && $mdpConfirm && $usermail) {
         $splitMail = explode("@", $usermail);
@@ -34,9 +34,7 @@ if (isset($_POST["loginInsc"]) && isset($_POST["nom"]) && isset($_POST["mdp"]) &
 
                 $mail->send();
                 $hashed = password_hash($mdp, PASSWORD_DEFAULT);
-                $insertSQL = "INSERT INTO `chatcf2m_users`(`login`, `displayedName`, `pwd`, `mailCF2M`) VALUES ('$loginInsc','$nom','$hashed','$usermail');";
-
-                mysqli_query($DB, $insertSQL);
+                userInscription($DB, $loginInsc, $nom, $hashed, $usermail);
             } else {
                 $error = '<h2 class="error">Your password doesn\'t match!</h2>';
             }

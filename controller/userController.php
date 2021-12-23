@@ -16,7 +16,7 @@ if (isset($_POST["validate"])) {
 }
 if (isset($_POST["changeName"]) && isset($_POST["userIdToChangeName"])) {
     $id = (int) $_POST["userIdToChangeName"];
-    $name = htmlspecialchars(strip_tags(trim($_POST["changeName"])), ENT_QUOTES);
+    $name = userEntryProtection($_POST["changeName"]);
 
     if ($name && strlen($name) <= 100 && $id) {
         changeUserName($DB, $id, $name);
