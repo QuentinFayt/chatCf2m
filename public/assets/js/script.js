@@ -238,6 +238,12 @@ if (document.querySelector(".room")) {
                 "afterend",
                 `<p id="user${user.users_id}" class="users">${user.displayedName}</p>`
               );
+              if (user.users_id == document.querySelector("header p span").id) {
+                alert(
+                  "You have been away for too long! Please log yourself back in!"
+                );
+                window.location.assign(document.URL);
+              }
             }
           }
         });
