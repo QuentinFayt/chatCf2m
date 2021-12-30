@@ -86,7 +86,8 @@ if (document.querySelector(".room")) {
   let offlineUsersContainer = document.querySelector(".offline");
   let loadMore = document.querySelector(".loadMore");
   $.get(
-    "assets/api/loadMessages.php",
+    "assets/router.php",
+    "getMessagesOnLoad",
     function success(data) {
       if (data.length < 20) {
         loadMore.style.display = "none";
@@ -112,10 +113,12 @@ if (document.querySelector(".room")) {
   loadMore.addEventListener("click", () => {
     let messages = document.querySelectorAll(".messageBox");
     messages = Array.from(messages);
-    let offsetToLoad = (messages.pop().id - messages.shift().id + 1).toString();
+    let getOlderMessagesOnClick = {
+      offsetToLoad: (messages.pop().id - messages.shift().id + 1).toString(),
+    };
     $.get(
-      "assets/api/loadOlderMessages.php",
-      offsetToLoad,
+      "assets/router.php",
+      getOlderMessagesOnClick,
       function success(data) {
         if (data.length < 20) {
           loadMore.style.display = "none";
@@ -137,7 +140,8 @@ if (document.querySelector(".room")) {
     );
   }); /*========Load all users from DB========*/
   $.get(
-    "assets/api/loadUsers.php",
+    "assets/router.php",
+    "getUsers",
     function success(data) {
       data.forEach((user) => {
         if (user.online == 1) {
@@ -162,9 +166,12 @@ if (document.querySelector(".room")) {
     if (messages.length) {
       messages = Array.from(messages);
     }
+    let lastMessage = {
+      lastMessageId: messages.length ? messages.pop().id : "0",
+    };
     $.get(
-      "assets/api/loadNewMessages.php",
-      messages.length ? messages.pop().id : "0",
+      "assets/router.php",
+      lastMessage,
       function success(data) {
         data.forEach((message) => {
           messagesContainer.insertAdjacentHTML(
@@ -194,7 +201,8 @@ if (document.querySelector(".room")) {
     );
     /*========Load all users from DB========*/
     $.get(
-      "assets/api/loadUsers.php",
+      "assets/router.php",
+      "getUsers",
       function success(data) {
         let dataUsers = [];
         data.forEach((user) => {
@@ -251,6 +259,12 @@ if (document.querySelector(".room")) {
       "JSON"
     );
   }, 500);
+
+  setInterval(function () {
+    $user = { userId: document.querySelector("header p span").id };
+    $.get("assets/router.php", $user);
+  }, 120000);
+
   /*========post new message to DB========*/
   document.addEventListener("keydown", (event) => {
     let key = event.key;
@@ -260,7 +274,7 @@ if (document.querySelector(".room")) {
         message: document.querySelector("#message").value,
       };
       if (data.message.length) {
-        $.post("assets/api/postMessage.php", data, () => {
+        $.post("assets/router.php", data, () => {
           $("#message").prop("disabled", true);
         });
         $("#message").val("");
