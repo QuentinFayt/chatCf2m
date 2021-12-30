@@ -1,5 +1,4 @@
 <?php
-dropEventOnLogOut($DB, $_SESSION["name"]);
 $_SESSION = [];
 $params = session_get_cookie_params();
 setcookie(

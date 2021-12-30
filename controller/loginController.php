@@ -12,8 +12,7 @@ if (isset($_POST["login"]) && isset($_POST["password"])) {
         $_SESSION["name"] = $userInfo["displayedName"];
         $_SESSION["userID"] =  $userInfo["users_id"];
         $_SESSION["right"] =  $userInfo["right"];
-        setUserOnline($DB, (int) $_SESSION["userID"]);
-        createEventToLogOut($DB, $_SESSION["name"], $_SESSION["userID"]);
+        setUserOnlineStatus($DB, (int) $_SESSION["userID"]);
     } else {
         $wrongLog = true;
     }
